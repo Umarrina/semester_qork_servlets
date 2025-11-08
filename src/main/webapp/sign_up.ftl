@@ -99,7 +99,7 @@
 
             <div>
                 <strong>Пароль:</strong><br>
-                <input type="password" name="password" placeholder="Введите пароль">
+                <input type="password" name="password" minlength="6" placeholder="Введите пароль">
             </div>
 
             <div>

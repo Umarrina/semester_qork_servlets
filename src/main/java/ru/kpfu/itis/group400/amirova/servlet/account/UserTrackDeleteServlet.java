@@ -26,6 +26,6 @@ public class UserTrackDeleteServlet extends HttpServlet {
         if (trackId != null && !trackId.isEmpty()) {
             trackService.deleteTrack(Integer.parseInt(trackId));
         }
-        resp.sendRedirect("/my_tracks");
+        resp.sendRedirect("/main");
     }
 }

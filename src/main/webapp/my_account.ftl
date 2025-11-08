@@ -5,18 +5,18 @@
 <#macro script></#macro>
 
 <#macro content>
-    <div class="profile-info">
+    <div class="situation-card" style="max-width: 600px;">
         <#if profilePhoto??>
-            <div>
+            <div style="text-align: center; margin-bottom: 20px;">
                 <strong>Фото профиля:</strong><br>
                 <img src="${profilePhoto}" alt="Profile Photo" style="max-width: 300px; margin-top: 10px;">
             </div>
         </#if>
 
-        <div><strong>Имя пользователя:</strong> ${username!}</div>
-        <div><strong>Имя:</strong> ${firstName!}</div>
-        <div><strong>Фамилия:</strong> ${lastName!}</div>
-        <div><strong>О себе:</strong> ${bio!}</div>
+        <div style="margin: 10px 0;"><strong>Имя пользователя:</strong> ${username!}</div>
+        <div style="margin: 10px 0;"><strong>Имя:</strong> ${firstName!}</div>
+        <div style="margin: 10px 0;"><strong>Фамилия:</strong> ${lastName!}</div>
+        <div style="margin: 10px 0;"><strong>О себе:</strong> ${bio!}</div>
     </div>
 
     <center style="margin-top: 20px;">

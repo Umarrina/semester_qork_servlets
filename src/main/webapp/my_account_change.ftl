@@ -64,7 +64,7 @@
 
             <div>
                 <strong>Почта:</strong><br>
-                <input type="text" name="email" placeholder="Введите вашу фамилию" value="${email!}">
+                <input type="text" name="email" placeholder="Введите адрес почты" value="${email!}">
             </div>
 
             <div>
