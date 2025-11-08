@@ -162,17 +162,40 @@ public class SituationDaoDB implements SituationDao {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM situation WHERE id = ?";
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
+            connection.setAutoCommit(false);
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            if (rowsAffected == 0) {
-                throw new RuntimeException("Situation not found for deletion");
+            String deleteTracksSituationsSQL = "DELETE FROM tracks_situations WHERE id_situation = ?";
+            try (PreparedStatement deleteTracksSituationsStmt = connection.prepareStatement(deleteTracksSituationsSQL)) {
+                deleteTracksSituationsStmt.setInt(1, id);
+                deleteTracksSituationsStmt.executeUpdate();
             }
+
+            String deleteSituationSQL = "DELETE FROM situation WHERE id = ?";
+            try (PreparedStatement deleteSituationStmt = connection.prepareStatement(deleteSituationSQL)) {
+                deleteSituationStmt.setInt(1, id);
+
+                int rowsAffected = deleteSituationStmt.executeUpdate();
+                if (rowsAffected == 0) {
+                    throw new RuntimeException("Situation not found for deletion");
+                }
+            }
+
+            connection.commit();
+
         } catch (SQLException e) {
-            throw new RuntimeException("Error deleting situation", e);
+            try {
+                connection.rollback();
+            } catch (SQLException rollbackEx) {
+                throw new RuntimeException("Error rolling back transaction", rollbackEx);
+            }
+            throw new RuntimeException("Error deleting situation and related data", e);
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                System.err.println("Error resetting auto-commit: " + e.getMessage());
+            }
         }
     }
 }

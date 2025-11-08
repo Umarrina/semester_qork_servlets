@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Amirova_Semester_Work_Servlets">
+    <output-path>$PROJECT_DIR$/out/artifacts/Amirova_Semester_Work_Servlets</output-path>
+    <root id="root" />
+  </artifact>
+</component>
